@@ -98,8 +98,6 @@ public class AzkarActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         updateScreen(viewPager);
                         autoswap(viewPager,viewPager.getCurrentItem());
-
-
                     }
                 });
             }
@@ -136,11 +134,11 @@ public void autoswap (ViewPager viewPager,int index ){
         // counter of zeker
         int y =zekerItems.get(index).getCounter();
 
-
         if (x==y ){
-
-
-            Toast.makeText(this, "Allah with you"+"", Toast.LENGTH_SHORT).show();
+            viewPager.postDelayed(() -> {
+                int next = viewPager.getCurrentItem() + 1;
+                viewPager.setCurrentItem(next, true);
+            }, 200);
         }
 
 
