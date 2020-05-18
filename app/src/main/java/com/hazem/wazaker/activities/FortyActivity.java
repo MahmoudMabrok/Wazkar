@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,12 +51,21 @@ public class FortyActivity extends AppCompatActivity {
         copybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                String item = fortyItems[viewPager.getCurrentItem()];
+              /*  ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = (ClipData) ClipData.newPlainText("Text",fortyItems [viewPager.getCurrentItem()] );
                 clipboard.setPrimaryClip(clip);
+*/
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, item);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
 
 
-                Toast.makeText(FortyActivity.this, "تم النسخ", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(FortyActivity.this, "تم النسخ", Toast.LENGTH_SHORT).show();
             }
         });
 
